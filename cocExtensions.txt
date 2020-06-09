@@ -1,0 +1,6 @@
+coc-pairs
+coc-explorer
+coc-calc
+coc-clangd
+coc-cmake
+coc-java
