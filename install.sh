@@ -3,10 +3,6 @@ rm -rf ~/.dotfiles
 mkdir ~/.dotfiles
 cp ./* ~/.dotfiles
 
-echo zsh
-rm ~/.zshrc
-ln -s ~/.dotfiles/zshrc ~/.zshrc
-
 echo tmux
 rm ~/.tmux.conf
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf

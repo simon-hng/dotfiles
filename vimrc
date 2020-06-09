@@ -18,6 +18,13 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'tpope/vim-fugitive'
 Plugin 'sheerun/vim-polyglot'
 
+" Coc-extensions
+Plugin 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
+Plugin 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
+Plugin 'weirongxu/coc-calc', {'do': 'yarn install --frozen-lockfile'}
+Plugin 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
+Plugin 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
