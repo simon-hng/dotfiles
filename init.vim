@@ -1,8 +1,9 @@
 call plug#begin()
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'itchyny/lightline.vim'
 	Plug 'sonph/onehalf', {'rtp': 'vim/'}
 	Plug 'tpope/vim-fugitive'
 
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 	Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 	Plug 'weirongxu/coc-calc', {'do': 'yarn install --frozen-lockfile'}
