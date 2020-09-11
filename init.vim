@@ -24,9 +24,11 @@ if exists('+termguicolors')
 endif
 
 set laststatus=2
+
 set tabstop=4
-set softtabstop=0 noexpandtab
 set shiftwidth=4
+set softtabstop=0
+set expandtab
 
 set nu rnu
 set hls
