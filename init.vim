@@ -2,14 +2,11 @@ call plug#begin()
 	Plug 'itchyny/lightline.vim'
 	Plug 'sonph/onehalf', {'rtp': 'vim/'}
 	Plug 'tpope/vim-fugitive'
-
+  Plug 'preservim/nerdtree'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
-	Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
-	Plug 'weirongxu/coc-calc', {'do': 'yarn install --frozen-lockfile'}
-	Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
-	Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
+
+let g:coc_global_extensions = ['coc-explorer' , 'coc-pairs', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 
 syntax on
 set t_Co=256
@@ -25,8 +22,8 @@ endif
 
 set laststatus=2
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set softtabstop=0
 set expandtab
 
