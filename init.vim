@@ -44,9 +44,9 @@ set sidescrolloff=8
 set scrolloff=5
 " tab and indent settings
 filetype indent on
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set shiftround
 set expandtab
 set smarttab
@@ -109,47 +109,7 @@ noremap <A-2> ^
 noremap <A-3> $
 " use system clip board accordingly
 set clipboard+=unnamedplus
-" noremap <A-y> "*y
-" noremap <A-p> "*p
-" noremap <A-Y> "+y
-" noremap <A-P> "+p
 
-" temporarily disable highlighting for searach
-nnoremap <silent> <space><CR> :nohlsearch<CR>
-" auto move cursor when insert braces
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap " ""<left>
-" inoremap ' ''<left>
-" inoremap ` ``<left>
-" inoremap () ()
-" inoremap [] []
-" inoremap {} {}
-" inoremap "" ""
-" inoremap '' ''
-" inoremap `` ``
-inoremap (<cr> (<CR><CR>)<up><end>
-inoremap [<CR> [<CR><CR>]<up><end>
-inoremap {<CR> {<CR><CR>}<up><end>
-"inoremap <> <><left> " avoid mistake when compare
-" test if it is useful
-inoremap kj <esc>
-" toggle line number for copying
-nnoremap <F6> :set nu! rnu!<CR>
-" toggle wrap
-nnoremap <F7> :set wrap!<CR>
-" toggle list - show all characters
-nnoremap <F8> :set list!<CR>
-" Format the hole file and delete space at the end of line
-nnoremap <silent> =-= mmgg=G'm
-nnoremap <silent> =--= mmgg=G:%s/\s\+$//<CR>'m
-" Save without exit
-nnoremap ZS :w<CR>
-" Abort all changes
-nnoremap QQ :edit!<CR>
-" open NerdTree
-nnoremap <F2> :NERDTreeToggle<CR>
 " Commentary toggle, must be recursive
 nmap <C-/> gcc
 vmap <C-/> gc
@@ -157,6 +117,8 @@ vmap <C-/> gc
 inoremap <silent> <insert>date <C-R>=strftime('%c')<CR>
 " toggle markdown preview
 nmap <silent> <F5> <Plug>MarkdownPreviewToggle
+" <Ctrl-l> redraws the screen and removes any search highlighting
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 " run startify
 nnoremap <silent> ZA :Startify<CR>
 " toggle table mode
@@ -164,16 +126,6 @@ nmap <silent> <F3> :TableModeToggle<CR>
 " avoid accidentally toggle help
 noremap <F1> <ESC>
 noremap! <F1> <ESC>
-" cursor movement
-noremap H ^
-noremap L $
-
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-
-" do not use Ex mode
-noremap Q <nop>
-noremap gQ <nop>
 
 " :W = :w
 command! -nargs=0 W :w
@@ -187,10 +139,7 @@ autocmd TermOpen term://* startinsert
 "------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 " Editor Functionality
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Konfekt/vim-CtrlXA'
 Plug 'junegunn/vim-peekaboo'
@@ -211,12 +160,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " Plug 'glacambre/firenvim', { 'do': ':call firenvim#install(0)' }
 
 " testing
-Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim', { 'for': ['markdown', 'vim-plug'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mzlogin/vim-markdown-toc'
-
 Plug 'HE7086/cyp-vim-syntax'
 call plug#end()
 
@@ -307,14 +254,13 @@ let g:CtrlXA_Toggles = [
 set hidden
 set updatetime=500
 let g:coc_global_extensions = [
-    \ 'coc-yank', 
     \ 'coc-json', 
     \ 'coc-yaml', 
     \ 'coc-highlight', 
-    \ 'coc-vimlsp', 
     \ 'coc-python', 
     \ 'coc-html', 
-    \ 'coc-clangd'
+    \ 'coc-clangd',
+    \ 'coc-pairs'
     \ ]
 
 if has("patch-8.1.1564")
@@ -323,8 +269,7 @@ else
     set signcolumn=yes
 endif
 " Use <c-space> to force trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+inoremap <silent><expr> <c-space> coc#refresh() " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Remap keys for gotos
@@ -348,7 +293,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+  if (indx(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
@@ -372,6 +317,10 @@ endfunction
 command! -nargs=0 Format :call CocAction('format')
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+" Use ctrl-f to format
+map <C-f> :call CocAction('format')<CR>
+" No prompt after :w
+silent !<command>
 
 " ---------- Run Code in Terminal ----------
 autocmd BufRead,BufNewFile *.hs nnoremap <F22> :w<CR>:term ghci %<CR>
