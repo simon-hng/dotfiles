@@ -98,25 +98,11 @@ nnoremap <silent> <A-j> :m .+1<CR>==
 nnoremap <silent> <A-k> :m .-2<CR>==
 vnoremap <silent> <A-j> :m '>+1<CR>gv=gv
 vnoremap <silent> <A-k> :m '<-2<CR>gv=gv
-" insert/command mod: Alt + hjkl -> move cursor
-noremap! <A-h> <left>
-noremap! <A-j> <down>
-noremap! <A-k> <up>
-noremap! <A-l> <right>
-" Alt + 0/1/2 -> line begin/start of text/end
-noremap <A-1> 0
-noremap <A-2> ^
-noremap <A-3> $
 " use system clip board accordingly
 set clipboard+=unnamedplus
 
-" Commentary toggle, must be recursive
-nmap <C-/> gcc
-vmap <C-/> gc
 " insert the current date and time
 inoremap <silent> <insert>date <C-R>=strftime('%c')<CR>
-" toggle markdown preview
-nmap <silent> <F5> <Plug>MarkdownPreviewToggle
 " <Ctrl-l> redraws the screen and removes any search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 " run startify
@@ -126,6 +112,9 @@ nmap <silent> <F3> :TableModeToggle<CR>
 " avoid accidentally toggle help
 noremap <F1> <ESC>
 noremap! <F1> <ESC>
+" Make Y  behave like C and D
+noremap Y y$
+
 
 " :W = :w
 command! -nargs=0 W :w
