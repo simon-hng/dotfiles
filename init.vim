@@ -129,7 +129,7 @@ autocmd TermOpen term://* startinsert
 call plug#begin('~/.config/nvim/plugged')
 " Editor Functionality
 Plug 'tpope/vim-fugitive'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'Konfekt/vim-CtrlXA'
 Plug 'junegunn/vim-peekaboo'
 " Themes and Colors
@@ -143,7 +143,7 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'junegunn/fzf', { 'dir': '~/.local/fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 " Browser extensions
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " Plug 'glacambre/firenvim', { 'do': ':call firenvim#install(0)' }
@@ -190,26 +190,11 @@ let NERDTreeIndicatorMapCustom = {
             \ "Unknown"   : "?"
             \ }
 
-" startify
-let g:startify_lists = [
-            \ { 'type': 'files',     'header': ['   MRU']            },
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-            \ { 'type': 'commands',  'header': ['   Commands']       },
-            \ ]
-let g:startify_bookmarks = [ {'v': '~/.config/nvim/init.vim'}, {'z': '~/.zshrc'} ]
-"let g:startify_commands = [ {'Vim Help Page': 'help'} ]
-let g:startify_custom_header = [
-            \ "         _   _ _______   _____ _____ ___   ___   __",
-            \ "        | | | | ____\\ \\ / /_ _|___  / _ \\ ( _ ) / /_",
-            \ "        | |_| |  _|  \\ V / | |   / / | | |/ _ \\| '_ \\",
-            \ "        |  _  | |___  | |  | |  / /| |_| | (_) | (_) |",
-            \ "        |_| |_|_____| |_| |___|/_/  \\___/ \\___/ \\___/",
-            \ "                     __     _____ __  __",
-            \ "                     \\ \\   / /_ _|  \\/  |",
-            \ "                      \\ \\ / / | || |\\/| |",
-            \ "                       \\ V /  | || |  | |",
-            \ "                        \\_/  |___|_|  |_|"
-            \ ]
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+" Prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+map <C-f> :Prettier<CR>
 
 " CtrlXA switch list
 let g:CtrlXA_Toggles = [
@@ -249,7 +234,8 @@ let g:coc_global_extensions = [
     \ 'coc-python', 
     \ 'coc-html', 
     \ 'coc-clangd',
-    \ 'coc-pairs'
+    \ 'coc-pairs',
+    \ 'coc-prettier'
     \ ]
 
 if has("patch-8.1.1564")
@@ -303,11 +289,11 @@ function! s:check_back_space() abort
 endfunction
 
 " Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+" command! -nargs=0 Format :call CocAction('format')
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 " Use ctrl-f to format
-map <C-f> :call CocAction('format')<CR>
+" map <C-f> :call CocAction('format')<CR>
 " No prompt after :w
 silent !<command>
 
